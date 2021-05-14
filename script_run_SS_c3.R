@@ -1,5 +1,5 @@
 rm(list=ls(all=TRUE)) 
-SSdir<-("~/IFOP/Loco_Assessment_AMERB/SA_Loco/Conglom_3_Base")
+SSdir<-("~/")
 setwd(SSdir)
 dir()
 
@@ -26,3 +26,13 @@ SSsummarize(tmp3)
 
 
 #SS_readdat(run.new)
+
+# Analisis retrospectivo
+
+    SS_doRetro(masterdir=mydir, oldsubdir="", newsubdir="retrospectives", years=0:-5)
+    
+    retroModels <- SSgetoutput(dirvec=file.path(mydir, "retrospectives",paste("retro",0:-5,sep="")))
+    retroSummary <- SSsummarize(retroModels)
+    endyrvec <- retroSummary$endyrs + 0:-5
+    SSplotComparisons(retroSummary, endyrvec=endyrvec, legendlabels=paste("Data",0:-5,"years"))
+  
